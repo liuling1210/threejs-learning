@@ -72,7 +72,8 @@ export default {
     // 模型
     initModel() {
       // 通过加载图片生成纹理
-      var map = new THREE.TextureLoader().load('http://172.16.126.50:8082/geometry.jpg');
+      // var map = new THREE.TextureLoader().load('http://172.16.126.50:8082/geometry.jpg');
+      var map = new THREE.TextureLoader().load("/img/geometry.jpg");
       // 定义纹理在水平和垂直方向简单的重复到无限大
       map.wrapS = map.wrapT = THREE.RepeatWrapping;
       // 定义纹理的各向异性
@@ -93,17 +94,26 @@ export default {
       this.scene.add(object1);
 
       //二十面体 （图形大小半径，大于零将不是二十面体，越大越圆滑）
-      var object2 = new THREE.Mesh(new THREE.IcosahedronGeometry(75, 0), material);
+      var object2 = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(75, 0),
+        material
+      );
       object2.position.set(-200, 0, 200);
       this.scene.add(object2);
 
       //八面体（图形大小半径，大于零将不是八面体，越大越圆滑）
-      var object3 = new THREE.Mesh(new THREE.OctahedronGeometry(75, 0), material);
+      var object3 = new THREE.Mesh(
+        new THREE.OctahedronGeometry(75, 0),
+        material
+      );
       object3.position.set(0, 0, 200);
       this.scene.add(object3);
 
       //四面体（图形大小半径，大于零将不是四面体，越大越圆滑）
-      var object4 = new THREE.Mesh(new THREE.TetrahedronGeometry(75, 0), material);
+      var object4 = new THREE.Mesh(
+        new THREE.TetrahedronGeometry(75, 0),
+        material
+      );
       object4.position.set(200, 0, 200);
       this.scene.add(object4);
 
@@ -130,6 +140,72 @@ export default {
       );
       object7.position.set(0, 0, 0);
       this.scene.add(object7);
+
+      //空心圆平面（内圆半径，外圆半径，分割面越大越圆滑，垂直外边分割面，开始绘制弧度，绘制弧度）
+      var object8 = new THREE.Mesh(
+        new THREE.RingGeometry(10, 50, 10, 5, 0, Math.PI * 2),
+        material
+      );
+      object8.position.set(200, 0, 0);
+      this.scene.add(object8);
+
+      // 圆柱体（头部圆的半径，底部圆的半径，高度，上下圆顶点个数，上下面切割线条数，上下面切割条数，上下面是否显示，开始弧度，绘制弧度）
+      var object9 = new THREE.Mesh(
+        new THREE.CylinderGeometry(25, 75, 100, 40, 5),
+        material
+      );
+      object9.position.set(400, 0, 0);
+      this.scene.add(object9);
+
+      // 车床模型
+      var points = [];
+      for (var i = 0; i < 50; i++) {
+        points.push(
+          new THREE.Vector2(
+            Math.sin(i * 0.2) * Math.sin(i * 0.1) * 15 + 50,
+            (i - 5) * 2
+          )
+        );
+      }
+
+      // (一个vector2的数组分别代表xy轴，生成圆周段的数目，开始弧度，绘制弧度)
+      var object10 = new THREE.Mesh(
+        new THREE.LatheGeometry(points, 20),
+        material
+      );
+      object10.position.set(-400, 0, -200);
+      this.scene.add(object10);
+
+      // 救生圈 (救生圈半径，管道半径，基于管道横切顶数点，救生圈横切顶点个数)
+      var object11 = new THREE.Mesh(
+        new THREE.TorusGeometry(50, 20, 20, 20),
+        material
+      );
+      object11.position.set(-200, 0, -200);
+      this.scene.add(object11);
+
+      // 环面纽结模型（图形半径，管道半径，基于管道横切定点数，根据图形半径横切定点数，绕旋转对称轴的圈数，环绕面的圆的圈数）
+      var object12 = new THREE.Mesh(
+        new THREE.TorusKnotGeometry(50, 10, 50, 20),
+        material
+      );
+      object12.position.set(0, 0, -200);
+      this.scene.add(object12);
+
+      // 轴辅助（每一个轴的长度）
+      var object13 = new THREE.AxesHelper(50);
+      object13.position.set(200, 0, -200);
+      this.scene.add(object13);
+
+      // 箭头辅助（箭头头部的方向必须是vecteor3, 箭头起点必须是vector3 , 箭头长度，箭头颜色）
+      var object14 = new THREE.ArrowHelper(
+        new THREE.Vector3(0, 1, 0),
+        new THREE.Vector3(0, 0, 0),
+        50,
+        0x00ffff
+      );
+      object14.position.set(400, 0, -200);
+      this.scene.add(object14);
     },
     animate() {
       requestAnimationFrame(this.animate);
@@ -169,7 +245,7 @@ export default {
       this.initModel();
       this.animate();
 
-      window.addEventListener("resize", this.onWindowResize(), false);
+      this.canvasFrame.addEventListener("resize", this.onWindowResize(), false);
     });
   }
 };
@@ -179,7 +255,7 @@ export default {
 #canvas-frame {
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 1125px;
   height: 600px;
   background-color: #eeeeee;
 }

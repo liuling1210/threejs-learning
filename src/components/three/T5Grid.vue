@@ -134,7 +134,7 @@ export default {
 #canvas-frame {
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 1125px;
   height: 600px;
   background-color: #eeeeee;
 }
