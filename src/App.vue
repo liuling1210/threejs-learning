@@ -44,6 +44,7 @@ import T3Animation from "./components/three/T3Animation";
 import T4Light from "./components/three/T4Light";
 import T5Grid from "./components/three/T5Grid";
 import T6Geometry from "./components/three/T6Geometry";
+import T7Word from "./components/three/T7Word";
 import W1HelloWorld from "./components/webgl/W1HelloWorld";
 import W2Square from "./components/webgl/W2Square";
 import W3ShaderColor from "./components/webgl/W3ShaderColor";
@@ -60,6 +61,7 @@ export default {
     T4Light,
     T5Grid,
     T6Geometry,
+    T7Word,
 
     W1HelloWorld,
     W2Square,
@@ -89,6 +91,7 @@ export default {
             { title: "4.three4 灯", com: "T4Light" },
             { title: "5.three5 网格", com: "T5Grid" },
             { title: "6.three6 几何", com: "T6Geometry" },
+            { title: "7.three7 字", com: "T7Word" },
           ]
         },
         {

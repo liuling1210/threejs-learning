@@ -4,7 +4,6 @@
 
 <script>
 import * as THREE from "three";
-// import * as THREE from "./geometry.jpg";
 
 export default {
   name: "T6Geometry",
@@ -25,19 +24,31 @@ export default {
       this.canvasFrame = document.getElementById("canvas-frame");
       this.width = this.canvasFrame.clientWidth;
       this.height = this.canvasFrame.clientHeight;
+      console.log(this.width, this.height);
       this.renderer = new THREE.WebGLRenderer({
+        // 是否执行抗锯齿
         antialias: true
       });
       // 设置canvas尺寸
-      this.renderer.setSize(this.width, this.height);
+      // console.log(this.width, this.height)
+      this.renderer.setSize(1000, this.height);
       // 设置背景
       this.renderer.setClearColor(0xffffff, 1.0);
       // 设置设备像素比
       this.renderer.setPixelRatio(this.canvasFrame.devicePixelRatio);
       // 添加到dom
+
       document
         .getElementById("canvas-frame")
         .appendChild(this.renderer.domElement);
+      // setTimeout(() => {
+      //   document
+      //     .getElementById("canvas-frame")
+      //     .appendChild(this.renderer.domElement);
+      // }, 5000);
+      // this.renderer.setSize(this.width, this.height);
+      // document.getElementsByTagName('canvas')[0].width = this.width;
+      // document.getElementsByTagName('canvas')[0].height = this.height;
     },
 
     // 相机
