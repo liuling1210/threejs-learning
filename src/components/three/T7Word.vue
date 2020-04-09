@@ -4,7 +4,6 @@
 
 <script>
 import * as THREE from "three";
-import * as Stats from "../export/Stats";
 import * as OrbitControls from "../export/OrbitControls";
 // import * as THREE from "./geometry.jpg";
 
